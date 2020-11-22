@@ -1,4 +1,6 @@
 .vscode
 target
-.setting
+.settings
 .git
+.classpath
+.project
