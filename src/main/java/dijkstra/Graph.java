@@ -1,10 +1,6 @@
 package dijkstra;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Graph {
@@ -28,13 +24,13 @@ public class Graph {
             if (e.vertexIsInEdge(vertex)) {
                 if (distance >= e.distance) {
                     distance = e.distance;
-                    minDistantVertex = vertex == e.vertex1 ? e.vertex2 : e.vertex1;
+                    minDistantVertex = vertex.equals(e.vertex1) ? e.vertex2 : e.vertex1;
                 }
             }
         }
         return Optional.ofNullable(minDistantVertex).orElseThrow(GraphNotConnectedException::new);
     }
-
+/*
     public Edge closestEdge(String vertex) {
         float distance = Float.MAX_VALUE;
         Edge minDistantEdge = null;
@@ -56,21 +52,24 @@ public class Graph {
         return Optional.ofNullable(minDistantEdge).orElseThrow(GraphNotConnectedException::new);
     }
 
+ */
+
     public Graph(Set<Edge> graph, String source) {
         this.graph = graph;
         this.source = source;
+        this.vertexes = (Set<String>)Collections.EMPTY_SET;
         this.vertexes.addAll(graph.stream().map(Edge::getVertex1).collect(Collectors.toSet()));
         this.vertexes.addAll(graph.stream().map(Edge::getVertex2).collect(Collectors.toSet()));
         this.listOfLinks.addAll(graph.stream().map(Edge::getLink).collect(Collectors.toList()));
     }
 
-    public HashMap<Float,List<String>> dijkstra(String source) {
+    public HashMap<Float,List<String>> dijkstraAlgorithm(String source) {
         Set<String> bufferes = this.vertexes;
         String buffer = source;
         // String bufferToRemove = null;
         List<String> previous = new ArrayList<>();
         float distance = 0;
-        HashMap<Float,List<String>> result = null;
+        HashMap<Float,List<String>> result = (HashMap<Float, List<String>>) Collections.EMPTY_MAP;
         // float distance = Float.MAX_VALUE;
         // float sourceDistance = 0;
         // this.graph.stream().forEach(e->{

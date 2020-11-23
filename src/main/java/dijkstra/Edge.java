@@ -1,5 +1,6 @@
 package dijkstra;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class Edge {
@@ -12,6 +13,7 @@ public class Edge {
     public Edge(String vertex1, String vertex2, float distance) {
         this.vertex1 = vertex1;
         this.vertex2 = vertex2;
+        this.link = (Set<String>) Collections.EMPTY_SET;
         this.link.add(vertex1);
         this.link.add(vertex2);
         this.distance = distance;
