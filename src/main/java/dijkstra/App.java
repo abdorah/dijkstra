@@ -7,26 +7,27 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
+    //static final Edge a = new Edge("A", "D", 14);
+    // static final Edge b = new Edge("A", "B", 7);
+    // static final Edge c = new Edge("A", "C", 9);
+    // static final Edge d = new Edge("D", "F", 9);
+    // static final Edge e = new Edge("D", "C", 2);
+    // static final Edge f = new Edge("C", "E", 11);
+    // static final Edge g = new Edge("E", "F", 6);
+    // static final Edge h = new Edge("B", "C", 10);
+    // static final Edge i = new Edge("B", "E", 15);
     public static void main( String[] args )
     {
-
-        Edge a = new Edge("A", "D", 14);
-        Edge b = new Edge("A", "B", 7);
-        Edge c = new Edge("A", "C", 9);
-        Edge d = new Edge("D", "F", 9);
-        Edge e = new Edge("D", "C", 2);
-        Edge f = new Edge("C", "E", 11);
-        Edge g = new Edge("E", "F", 6);
-        Edge h = new Edge("B", "C", 10);
-        Edge i = new Edge("B", "E", 15);
-
-        Set<Edge> edges = Stream.of(a, b, c, d, e, f, g, h, i).collect(Collectors.toSet());
+        Set<Edge> edges = Stream.of(new Edge("A", "D", 14), new Edge("A", "B", 7), 
+        new Edge("A", "C", 9), new Edge("D", "F", 9), new Edge("D", "C", 2), new Edge("C", "E", 11), 
+        new Edge("E", "F", 6), new Edge("B", "C", 10), new Edge("B", "E", 15)).collect(Collectors.toSet());
         Graph graph = new Graph(edges, "A");
         HashMap<Float,List<String>> expectation = new HashMap<Float,List<String>>();
         HashMap<Float,List<String>> actual = new HashMap<Float,List<String>>();

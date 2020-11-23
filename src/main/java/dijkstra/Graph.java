@@ -8,7 +8,7 @@ public class Graph {
     String source;
     Set<Edge> graph;
     Set<String> vertexes;
-    List<Set<String>> listOfLinks;
+    //List<Set<String>> listOfLinks;
 
     public String closestVertex(String vertex) {
         float distance = Float.MAX_VALUE;
@@ -57,10 +57,10 @@ public class Graph {
     public Graph(Set<Edge> graph, String source) {
         this.graph = graph;
         this.source = source;
-        this.vertexes = (Set<String>)Collections.EMPTY_SET;
+        this.vertexes = new HashSet<>();
         this.vertexes.addAll(graph.stream().map(Edge::getVertex1).collect(Collectors.toSet()));
         this.vertexes.addAll(graph.stream().map(Edge::getVertex2).collect(Collectors.toSet()));
-        this.listOfLinks.addAll(graph.stream().map(Edge::getLink).collect(Collectors.toList()));
+        //this.listOfLinks.addAll(graph.stream().map(Edge::getLink).collect(Collectors.toList()));
     }
 
     public HashMap<Float,List<String>> dijkstraAlgorithm(String source) {
@@ -69,7 +69,7 @@ public class Graph {
         // String bufferToRemove = null;
         List<String> previous = new ArrayList<>();
         float distance = 0;
-        HashMap<Float,List<String>> result = (HashMap<Float, List<String>>) Collections.EMPTY_MAP;
+        HashMap<Float,List<String>> result = new HashMap<Float,List<String>>();
         // float distance = Float.MAX_VALUE;
         // float sourceDistance = 0;
         // this.graph.stream().forEach(e->{
