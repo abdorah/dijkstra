@@ -4,3 +4,5 @@ target
 .git
 .classpath
 .project
+.idea
+dijkstra.iml
