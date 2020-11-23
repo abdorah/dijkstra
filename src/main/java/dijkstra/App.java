@@ -2,7 +2,6 @@ package dijkstra;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,10 +27,11 @@ public class App
         Set<Edge> edges = Stream.of(new Edge("A", "D", 14), new Edge("A", "B", 7), 
         new Edge("A", "C", 9), new Edge("D", "F", 9), new Edge("D", "C", 2), new Edge("C", "E", 11), 
         new Edge("E", "F", 6), new Edge("B", "C", 10), new Edge("B", "E", 15)).collect(Collectors.toSet());
-        Graph graph = new Graph(edges, "A");
+        Graph graph = new Graph(edges);
         HashMap<Float,List<String>> expectation = new HashMap<Float,List<String>>();
         HashMap<Float,List<String>> actual = new HashMap<Float,List<String>>();
         List<String> list = Arrays.asList("A","B","C","D","E");
+         //asList("A","B","C","D","E");
         expectation.put((float) 20, list);
         actual = graph.dijkstraAlgorithm("A");
         if(actual.equals(expectation))
