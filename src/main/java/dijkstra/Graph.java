@@ -10,21 +10,12 @@ import java.util.stream.Collectors;
 
 public class Graph {
 
-    // String source;
     Set<Edge> graph;
     Set<String> vertexes;
-    // List<Set<String>> listOfLinks;
 
     public String closestVertex(String vertex) {
         float distance = Float.MAX_VALUE;
         String minDistantVertex = null;
-        // Set<String> link;
-        // for(Set<String> l : this.graph.listOfLinks){
-        // link.add(vertex);
-        // link.add(this.);
-        // link = null;
-        // }
-        // this.graph.stream().filter(v->v.equals(vertex)).collect(collector)
         for (Edge e : this.graph) {
             if (e.vertexIsInEdge(vertex)) {
                 if (distance >= e.distance) {
@@ -63,88 +54,61 @@ public class Graph {
         return Optional.ofNullable(result).orElseThrow(NullPointerException::new);
     }
 
-    /*
-     * public Edge closestEdge(String vertex) { float distance = Float.MAX_VALUE;
-     * Edge minDistantEdge = null; // Set<String> link; // for(Set<String> l :
-     * this.graph.listOfLinks){ // link.add(vertex); // link.add(this.); // link =
-     * null; // } //
-     * this.graph.stream().filter(v->v.equals(vertex)).collect(collector) for (Edge
-     * e : this.graph) { if (e.vertexIsInEdge(vertex)) { if (distance >= e.distance)
-     * { distance = e.distance; minDistantEdge = e; } } } return
-     * Optional.ofNullable(minDistantEdge).orElseThrow(GraphNotConnectedException::
-     * new); }
-     * 
-     */
-
-    public Graph(Set<Edge> graph/* , String source */) {
+    public Graph(Set<Edge> graph) {
         this.graph = graph;
-        // this.source = source;
         this.vertexes = new HashSet<>();
         this.vertexes.addAll(graph.stream().map(Edge::getVertex1).collect(Collectors.toSet()));
         this.vertexes.addAll(graph.stream().map(Edge::getVertex2).collect(Collectors.toSet()));
-        // this.listOfLinks.addAll(graph.stream().map(Edge::getLink).collect(Collectors.toList()));
     }
 
-//     public HashMap<Float, List<String>> dijkstraAlgorithm(String source) {
-//         Set<String> bufferes = this.vertexes;
-//         String buffer = source;
-//         // String bufferToRemove = null;
-//         List<String> previous = new ArrayList<>();
-//         float distance = 0;
-//         HashMap<Float, List<String>> result = new HashMap<Float, List<String>>();
-//         // float distance = Float.MAX_VALUE;
-//         // float sourceDistance = 0;
-//         // this.graph.stream().forEach(e->{
-
-//         // });
-//         while (!(bufferes.isEmpty())) {
-//             buffer = this.closestVertex(buffer);
-//             bufferes.remove(buffer);
-//             for (Edge e : this.graph) {
-//                 if (e.vertexIsInEdge(buffer)) {
-//                     // buffer = ;
-//                     distance = distance + e.distance;
-//                     previous.add(buffer == e.vertex1 ? e.vertex2 : e.vertex1);
-//                 }
-//             }
-//         }
-//         result.put(distance, previous);
-//         return Optional.ofNullable(result).orElseThrow(GraphNotConnectedException::new);
-//     }
-    public HashMap<Float, List<String>> dijkstraAlgorithm(String source) {
+    public HashMap<String, Float> dijkstraAlgorithm(String source) {
         HashMap<String,Float> distances = new HashMap<String,Float>();
-        HashMap<String,List<String>> previous = new HashMap<String,List<String>>();
-        List<String> points = new ArrayList<String>();
+        HashMap<String,String> previous = new HashMap<String,String>();
+        //HashMap<Float, String> result = new HashMap<Float, String>();
+        //String points = "";
         Set<String> bufferes = this.vertexes;
         String buffer = source;
+        String u = source;
+        boolean x;
         float alt;
-        for(String v : this.vertexes){
+        for(String v : bufferes){
+            previous.put(v, "");
             distances.put(v, Float.MAX_VALUE);
-            previous.put(v, points);
-            if(source.equals(v)){
-                distances.put(v, (float)0);
-            }
         }
+        distances.replace(source, (float)0);
+        //bufferes.remove(source);
         while (!(bufferes.isEmpty())){
-            if(bufferes.contains(this.closestVertex(buffer))){
-                buffer = this.closestVertex(buffer);
-                bufferes.remove(buffer);
+            x = true;
+            for (String v : bufferes) {
+                if(x){
+                    u = v;
+                    x = false;
+                }
+                if(distances.get(v) <= distances.get(u)){
+                    u = v;
+                }
             }
+
+            bufferes.remove(buffer);
+            buffer = u;
+
             for (String v : this.getLinks(buffer)) {
                 if(bufferes.contains(v)){
                     alt = distances.get(buffer) + this.getEdge(v, buffer).distance;
                     if(alt<distances.get(v)){
                         distances.replace(v, alt);
-                        points.add(buffer);
-                        previous.replace(v, points);
+                        previous.replace(v, buffer);
                     }
                 }
             }
         }
-        HashMap<Float, List<String>> result = new HashMap<Float, List<String>>(); 
-        for (String v : bufferes) {
-            result.put(distances.get(v), previous.get(v));
-        }
-        return Optional.ofNullable(result).orElseThrow(GraphNotConnectedException::new);
+
+        // for (String v : bufferes) {
+        //     result.put(distances.get(v), previous.get(v));
+        // }
+
+        //result.put(distances.get("F"), previous.get("F"));
+
+        return Optional.ofNullable(distances).orElseThrow(GraphNotConnectedException::new);
     }
 }
