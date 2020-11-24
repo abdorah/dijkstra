@@ -4,15 +4,15 @@ import java.util.HashMap;
 
 public class Result {
     HashMap<String,Float> distances;
-    HashMap<String,String> previous;
-    
-    public void setResult(HashMap<String, Float> distances, HashMap<String, String> previous) {
+    HashMap<String,String> previouses;
+
+    public void setResult(HashMap<String, Float> distances, HashMap<String, String> previouses) {
         this.distances = distances;
-        this.previous = previous;
+        this.previouses = previouses;
     }
 
     @Override
     public String toString() {
-        return "Result [distances=" + distances + ", previous=" + previous + "]";
+        return "Result [distances=" + distances + ", previouses=" + previouses + "]";
     }
 }

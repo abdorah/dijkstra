@@ -61,7 +61,7 @@ public class Graph {
 
     public Result dijkstraAlgorithm(String source) {
         HashMap<String,Float> distances = new HashMap<String,Float>();
-        HashMap<String,String> previous = new HashMap<String,String>();
+        HashMap<String,String> previouses = new HashMap<String,String>();
         Result result = new Result();
         Set<String> bufferes = this.vertexes;
         String buffer = source;
@@ -69,7 +69,7 @@ public class Graph {
         boolean x;
         float alt;
         for(String v : bufferes){
-            previous.put(v, "");
+            previouses.put(v, "");
             distances.put(v, Float.MAX_VALUE);
         }
         distances.replace(source, (float)0);
@@ -93,12 +93,12 @@ public class Graph {
                     alt = distances.get(buffer) + this.getEdge(v, buffer).distance;
                     if(alt<distances.get(v)){
                         distances.replace(v, alt);
-                        previous.replace(v, buffer);
+                        previouses.replace(v, buffer);
                     }
                 }
             }
         }
-        result.setResult(distances, previous);
+        result.setResult(distances, previouses);
         return Optional.ofNullable(result).orElseThrow(GraphNotConnectedException::new);
     }
 }
