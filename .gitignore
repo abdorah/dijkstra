@@ -1,0 +1,8 @@
+.vscode
+target
+.settings
+.git
+.classpath
+.project
+.idea
+dijkstra.iml
