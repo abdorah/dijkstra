@@ -59,9 +59,10 @@ public class Graph {
         this.vertexes.addAll(graph.stream().map(Edge::getVertex2).collect(Collectors.toSet()));
     }
 
-    public HashMap<String, Float> dijkstraAlgorithm(String source) {
+    public Result dijkstraAlgorithm(String source) {
         HashMap<String,Float> distances = new HashMap<String,Float>();
         HashMap<String,String> previous = new HashMap<String,String>();
+        Result result = new Result();
         Set<String> bufferes = this.vertexes;
         String buffer = source;
         String u = source;
@@ -97,13 +98,7 @@ public class Graph {
                 }
             }
         }
-
-        // for (String v : bufferes) {
-        //     result.put(distances.get(v), previous.get(v));
-        // }
-
-        //result.put(distances.get("F"), previous.get("F"));
-
-        return Optional.ofNullable(distances).orElseThrow(GraphNotConnectedException::new);
+        result.setResult(distances, previous);
+        return Optional.ofNullable(result).orElseThrow(GraphNotConnectedException::new);
     }
 }
