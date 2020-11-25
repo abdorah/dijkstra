@@ -1,5 +1,7 @@
 # Dijkstra
 
+![Badge](https://img.shields.io/badge/Learning-Tutorial-green) ![Badge](https://img.shields.io/badge/JUnit-4.11-brightgreen) ![Badge](https://img.shields.io/badge/JDK-11-brightgreen)
+
 + Definition:
 
 > This is a simple implementation of the famous Dijkstra. It contains a simple test example that I get from [wikipidea](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). In fact, this implementation give you the shortest path to all the vertexes in your graph.
