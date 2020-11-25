@@ -20,4 +20,7 @@ You find next the graph of the example I used in the test.
 
 + How to use this code:
 
-> This is a maven project; after clone the code to your local machin have to download the depencies to use JUnit for testing. Otherwise, you can just delete the file *pom.xml* and learn from the given test to implement your own main methode and print the result. Then you can delete all the *test* folder.
+> This is a maven project; after clone the code to your local machin have to download the depencies to use JUnit for testing. You can use this command:
+
+```sh mvn install```
+> . Otherwise, you can just delete the file *pom.xml* and learn from the given test to implement your own main methode and print the result. Then you can delete all the *test* folder.
